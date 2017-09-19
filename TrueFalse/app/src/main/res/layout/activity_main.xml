@@ -41,6 +41,8 @@
             android:layout_height="wrap_content"
             android:text="@string/false_display"/>
 
+
+
     </LinearLayout>
 
     <TextView
@@ -60,5 +62,12 @@
         android:layout_height="wrap_content"
         android:onClick="onClickNext"
         android:text="@string/next"/>
+
+    <Button
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickFinish"
+        android:text="@string/fin"/>
 
 </LinearLayout>
