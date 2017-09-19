@@ -5,12 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.chapman.cpsc356.truefalse.R;
 import edu.chapman.cpsc356.truefalse.models.QuestionModel;
 
 public class MainActivity extends AppCompatActivity
 {
-    private QuestionModel question;
+    private List<QuestionModel> questions = new ArrayList<>();
+
+    private int index = 0;
+    private QuestionModel currentQuestion;
 
     private TextView questionTextView;
     private TextView resultTextView;
@@ -24,15 +30,18 @@ public class MainActivity extends AppCompatActivity
         this.questionTextView = (TextView) findViewById(R.id.tv_question);
         this.resultTextView = (TextView) findViewById(R.id.tv_result);
 
-        this.question = new QuestionModel("The live band outside is done", false);
+        this.questions.add(new QuestionModel("The live band outside is done", false));
+        this.questions.add(new QuestionModel("The sky is blue", true));
+        this.questions.add(new QuestionModel("There are 27 people in this class", false));
+        this.questions.add(new QuestionModel("We're at Chapman University", true));
 
-        this.questionTextView.setText(this.question.getText());
+        showCurrentQuestion();
     }
 
     public void onClickTrue(View view)
     {
         //noinspection PointlessBooleanExpression
-        if (this.question.getAnswer() == true)
+        if (this.currentQuestion.getAnswer() == true)
         {
             this.resultTextView.setText(R.string.correct_display);
         }
@@ -47,7 +56,7 @@ public class MainActivity extends AppCompatActivity
     public void onClickFalse(View view)
     {
         //noinspection PointlessBooleanExpression
-        if (this.question.getAnswer() == false)
+        if (this.currentQuestion.getAnswer() == false)
         {
             this.resultTextView.setText(R.string.correct_display);
         }
@@ -57,5 +66,25 @@ public class MainActivity extends AppCompatActivity
         }
 
         this.resultTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void showCurrentQuestion()
+    {
+        // Start over at the beginning if past the end
+        if (this.index >= this.questions.size())
+        {
+            this.index = 0;
+        }
+
+        this.currentQuestion = this.questions.get(this.index);
+        this.questionTextView.setText(this.currentQuestion.getText());
+
+        this.index++;
+    }
+
+    public void onClickNext(View view)
+    {
+        showCurrentQuestion();
+        this.resultTextView.setVisibility(View.GONE);
     }
 }

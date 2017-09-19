@@ -4,4 +4,5 @@
     <string name="false_display">False</string>
     <string name="correct_display">You got it right!</string>
     <string name="incorrect_display">You don\'t know anything</string>
+    <string name="next">Next</string>
 </resources>
