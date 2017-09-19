@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TrueFalse</string>
+    <string name="true_display">True</string>
+    <string name="false_display">False</string>
+    <string name="correct_display">You got it right!</string>
+    <string name="incorrect_display">You don\'t know anything</string>
+</resources>
