@@ -1,5 +1,6 @@
 package edu.chapman.cpsc356.truefalse.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +15,7 @@ import edu.chapman.cpsc356.truefalse.models.QuestionModel;
 
 public class MainActivity extends AppCompatActivity
 {
-    private final String LOGTAG = "MainActivity";
+    private final String LOGTAG = "A";
 
     private List<QuestionModel> questions = new ArrayList<>();
 
@@ -144,8 +145,10 @@ public class MainActivity extends AppCompatActivity
         this.resultTextView.setVisibility(View.GONE);
     }
 
-    public void onClickFinish(View view)
+    public void onClickStartNew(View view)
     {
-        finish();
+        // Start a new activity
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
     }
 }
