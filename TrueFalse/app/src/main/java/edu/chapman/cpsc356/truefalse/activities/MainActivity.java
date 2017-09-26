@@ -1,6 +1,7 @@
 package edu.chapman.cpsc356.truefalse.activities;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import edu.chapman.cpsc356.truefalse.models.QuestionModel;
 public class MainActivity extends AppCompatActivity
 {
     private final String LOGTAG = "A";
+    private final String PREV_INDEX = "previous_index";
 
     private List<QuestionModel> questions = new ArrayList<>();
 
@@ -39,9 +41,23 @@ public class MainActivity extends AppCompatActivity
         this.questions.add(new QuestionModel("There are 27 people in this class", false));
         this.questions.add(new QuestionModel("We're at Chapman University", true));
 
+        if (savedInstanceState != null)
+        {
+            this.index = savedInstanceState.getInt(PREV_INDEX);
+        }
+
         showCurrentQuestion();
 
         Log.d(LOGTAG, "onCreate()");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        // Save current index to bundle
+        outState.putInt(PREV_INDEX, this.index - 1);
     }
 
     @Override
