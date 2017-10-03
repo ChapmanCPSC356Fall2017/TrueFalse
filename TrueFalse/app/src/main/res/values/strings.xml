@@ -7,4 +7,10 @@
     <string name="next">Next</string>
     <string name="fin">Finish</string>
     <string name="start_new_activity">Start New Activity</string>
+    <string name="cheat">Cheat</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="are_you_sure_msg">Are you sure you want to cheat?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="another_confirmation">Are you really really sure?</string>
 </resources>

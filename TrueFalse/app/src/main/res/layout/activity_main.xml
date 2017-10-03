@@ -67,7 +67,7 @@
         android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickStartNew"
-        android:text="@string/start_new_activity"/>
+        android:onClick="onClickCheat"
+        android:text="@string/cheat"/>
 
 </LinearLayout>

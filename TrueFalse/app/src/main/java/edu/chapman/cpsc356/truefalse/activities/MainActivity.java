@@ -1,7 +1,8 @@
 package edu.chapman.cpsc356.truefalse.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.PersistableBundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -161,10 +162,23 @@ public class MainActivity extends AppCompatActivity
         this.resultTextView.setVisibility(View.GONE);
     }
 
-    public void onClickStartNew(View view)
+    public void onClickCheat(View view)
     {
-        // Start a new activity
-        Intent intent = new Intent(this, SecondActivity.class);
-        startActivity(intent);
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.are_you_sure)
+                .setMessage(R.string.are_you_sure_msg)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        Intent intent = new Intent(MainActivity.this, CheatActivity.class)
+                                .putExtra(CheatActivity.EXTRA_ANSWER, currentQuestion.getAnswer());
+
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
     }
 }
