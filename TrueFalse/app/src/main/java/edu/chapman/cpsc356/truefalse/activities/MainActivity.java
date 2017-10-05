@@ -17,7 +17,7 @@ import edu.chapman.cpsc356.truefalse.models.QuestionModel;
 
 public class MainActivity extends AppCompatActivity
 {
-    private final String LOGTAG = "A";
+    private final String LOGTAG = "MainActivity";
     private final String PREV_INDEX = "previous_index";
 
     private List<QuestionModel> questions = new ArrayList<>();
@@ -112,6 +112,24 @@ public class MainActivity extends AppCompatActivity
         Log.d(LOGTAG, "onDestroy()");
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CheatActivity.REQUEST_CHEATED)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                Log.i(LOGTAG, "Cheated");
+            }
+            else
+            {
+                Log.i(LOGTAG, "DID NOT Cheat");
+            }
+        }
+    }
+
     public void onClickTrue(View view)
     {
         //noinspection PointlessBooleanExpression
@@ -175,7 +193,7 @@ public class MainActivity extends AppCompatActivity
                         Intent intent = new Intent(MainActivity.this, CheatActivity.class)
                                 .putExtra(CheatActivity.EXTRA_ANSWER, currentQuestion.getAnswer());
 
-                        startActivity(intent);
+                        startActivityForResult(intent, CheatActivity.REQUEST_CHEATED);
                     }
                 })
                 .setNegativeButton(R.string.no, null)
