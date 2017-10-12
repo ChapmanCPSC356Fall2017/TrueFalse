@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity
 
     private TextView questionTextView;
     private TextView resultTextView;
+
+    private boolean currentQuestionCheated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -122,6 +125,7 @@ public class MainActivity extends AppCompatActivity
             if (resultCode == RESULT_OK)
             {
                 Log.i(LOGTAG, "Cheated");
+                this.currentQuestionCheated = true;
             }
             else
             {
@@ -135,7 +139,7 @@ public class MainActivity extends AppCompatActivity
         //noinspection PointlessBooleanExpression
         if (this.currentQuestion.getAnswer() == true)
         {
-            this.resultTextView.setText(R.string.correct_display);
+            showCorrect();
         }
         else
         {
@@ -150,7 +154,7 @@ public class MainActivity extends AppCompatActivity
         //noinspection PointlessBooleanExpression
         if (this.currentQuestion.getAnswer() == false)
         {
-            this.resultTextView.setText(R.string.correct_display);
+            showCorrect();
         }
         else
         {
@@ -160,8 +164,20 @@ public class MainActivity extends AppCompatActivity
         this.resultTextView.setVisibility(View.VISIBLE);
     }
 
+    private void showCorrect()
+    {
+        this.resultTextView.setText(R.string.correct_display);
+
+        if (this.currentQuestionCheated)
+        {
+            Toast.makeText(this, "Yeah ... but you cheated", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void showCurrentQuestion()
     {
+        this.currentQuestionCheated = false;
+
         // Start over at the beginning if past the end
         if (this.index >= this.questions.size())
         {
